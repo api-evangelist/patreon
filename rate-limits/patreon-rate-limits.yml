@@ -1,0 +1,35 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Patreon
+providerId: patreon
+created: '2026-05-08'
+modified: '2026-05-08'
+reconciled: false
+tags:
+- Creator Economy
+- Membership
+- Subscription
+- Content
+- Community
+- Rate Limiting
+- Quotas
+- Throttling
+description: Placeholder rate-limit artifact for Patreon. Replace with real limits once researched.
+notes: Initial scaffold — limits have not yet been reconciled.
+sources:
+- https://www.patreon.com/
+responseCodes:
+  throttled: 429
+limits:
+- name: Default
+  scope: account
+  metric: varies
+  limit: see provider documentation
+  notes: Pending reconciliation.
+policies:
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor any Retry-After header.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

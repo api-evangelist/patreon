@@ -1,0 +1,41 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Patreon
+providerId: patreon
+created: '2026-05-08'
+modified: '2026-05-08'
+reconciled: false
+tags:
+- Creator Economy
+- Membership
+- Subscription
+- Content
+- Community
+- Plans
+description: Placeholder plans/pricing artifact for Patreon. Replace with real published pricing once
+  the pipeline researches the provider's plans page.
+notes: Initial scaffold — plans/pricing have not yet been reconciled against the provider's documentation.
+sources:
+- https://www.patreon.com/
+plans:
+- id: patreon-default
+  name: To Be Reconciled
+  type: enterprise
+  description: Initial scaffold; replace with provider plan tiers once pricing is reconciled.
+  entries:
+  - label: API Access
+    name: api_access
+    type: flat
+    metric: varies
+    limit: -1
+    timeFrame: usage
+    geo: global
+    unit: 1
+    price: see https://www.patreon.com/
+    userMultiplied: false
+  elements:
+  - name: Pending Reconciliation
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

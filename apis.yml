@@ -1,0 +1,29 @@
+aid: patreon
+url: https://raw.githubusercontent.com/api-evangelist/patreon/refs/heads/main/apis.yml
+name: Patreon
+x-type: company
+description: >-
+  Patreon is a membership platform for creators offering tiered subscriptions, content publishing, community, and payments. APIs expose campaigns, members, posts, and benefits.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Creator Economy
+  - Membership
+  - Subscription
+  - Content
+  - Community
+created: '2026-05-08'
+modified: '2026-05-08'
+specificationVersion: '0.19'
+apis: []
+common:
+  - type: Website
+    url: https://www.patreon.com/
+  - type: Plans
+    url: plans/patreon-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/patreon-rate-limits.yml
+  - type: FinOps
+    url: finops/patreon-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
