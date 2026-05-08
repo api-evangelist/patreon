@@ -5,20 +5,20 @@ provider: Patreon
 providerId: patreon
 created: '2026-05-08'
 modified: '2026-05-08'
-reconciled: false
+reconciled: true
 tags:
 - Creator Economy
 - Membership
-- Subscription
-- Content
-- Community
 - FinOps
 - Cost Management
 - FOCUS
-description: FOCUS-aligned FinOps placeholder for Patreon. Pipeline will replace with real billing details.
-notes: Initial scaffold — billing model has not yet been reconciled.
+description: FOCUS-aligned FinOps profile for Patreon's revenue-share creator pricing.
+notes: >-
+  Patreon's billing model is revenue-based — creators pay a 10% platform fee on income
+  earned plus payment processing, currency conversion, payout, and applicable tax fees.
+  There is no per-call API charge.
 sources:
-- https://www.patreon.com/
+- https://www.patreon.com/pricing
 - https://focus.finops.org/focus-specification/v1-3/
 alignedWith:
   framework: FinOps Foundation Framework
@@ -29,15 +29,15 @@ alignedWith:
 publisherName: Patreon
 serviceCategory: Creator Economy
 billingModel:
-  pricingCategory: To Be Reconciled
+  pricingCategory: Revenue Share
   billingFrequency: Monthly
   billingCurrency: USD
   chargeCategories:
   - Usage
-  - Purchase
+  - Tax
   - Adjustment
 focusColumns:
-  ServiceName: Patreon
+  ServiceName: Patreon Creator Platform
   ServiceCategory: Creator Economy
   ProviderName: Patreon
   PublisherName: Patreon
@@ -45,22 +45,42 @@ focusColumns:
   BillingCurrency: USD
   ChargeCategory: Usage
 meters:
-- name: api_usage
-  description: Catch-all meter pending reconciliation.
-  unit: varies
+- name: platform_fee
+  description: 10% of creator earnings.
+  unit: percent_of_earnings
   aggregation: sum
   dimensions:
-  - account
-  - resource
+  - campaign
+  - currency
+- name: payment_processing_fee
+  description: Stripe/PayPal-style processing fees on member charges.
+  unit: percent_plus_fixed
+  aggregation: sum
+  dimensions:
+  - payment_method
+  - currency
+- name: currency_conversion_fee
+  description: Foreign-exchange fee on cross-currency payouts.
+  unit: percent
+  aggregation: sum
+  dimensions:
+  - source_currency
+  - target_currency
+- name: payout_fee
+  description: Per-payout transfer fee.
+  unit: fixed
+  aggregation: sum
+  dimensions:
+  - payout_method
 principles:
 - name: Visibility
-  description: Pull provider invoices or usage exports until a self-serve usage feed is documented.
+  description: Pull monthly creator earnings and fee statements; correlate with platform fee, processing, FX, and payout meters.
 - name: Allocation
-  description: Tag invoice line items to consuming business units in your FinOps store.
+  description: Allocate fees to specific campaigns, tiers, and currencies for clear unit economics.
 - name: Optimization
-  description: Levers depend on the provider's billing model; review at renewal once reconciled.
+  description: Optimize payout cadence and member-side payment methods to minimize processing and FX fees.
 - name: Accountability
-  description: Assign a contract owner to review billing against negotiated terms.
+  description: Assign a creator-finance owner to reconcile Patreon statements against ledger revenue.
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

@@ -5,37 +5,56 @@ provider: Patreon
 providerId: patreon
 created: '2026-05-08'
 modified: '2026-05-08'
-reconciled: false
+reconciled: true
 tags:
 - Creator Economy
 - Membership
 - Subscription
-- Content
-- Community
 - Plans
-description: Placeholder plans/pricing artifact for Patreon. Replace with real published pricing once
-  the pipeline researches the provider's plans page.
-notes: Initial scaffold — plans/pricing have not yet been reconciled against the provider's documentation.
+description: Patreon platform pricing — a single creator plan that takes a percentage of earnings.
+notes: >-
+  Patreon switched away from tiered Lite/Pro/Premium plans to a single unified pricing
+  model. Creators pay a flat platform fee on income earned, plus payment processing,
+  currency conversion, payout, and applicable taxes. API access is free with any
+  creator account; no separate API SKU.
 sources:
-- https://www.patreon.com/
+- https://www.patreon.com/pricing
+- https://docs.patreon.com/
 plans:
-- id: patreon-default
-  name: To Be Reconciled
-  type: enterprise
-  description: Initial scaffold; replace with provider plan tiers once pricing is reconciled.
+- id: patreon-creator
+  name: Creator
+  type: usage
+  description: >-
+    Free to start. Patreon takes 10% of income earned plus payment processing,
+    currency conversion, payout fees, and applicable taxes. API access is included
+    for any creator account.
   entries:
-  - label: API Access
-    name: api_access
-    type: flat
-    metric: varies
+  - label: Platform Fee
+    name: platform_fee
+    type: percentage
+    metric: earnings
     limit: -1
-    timeFrame: usage
+    timeFrame: monthly
     geo: global
     unit: 1
-    price: see https://www.patreon.com/
+    price: 10% of creator earnings
+    userMultiplied: false
+  - label: API Access
+    name: api_access
+    type: included
+    metric: api_call
+    limit: -1
+    timeFrame: monthly
+    geo: global
+    unit: 1
+    price: 0
     userMultiplied: false
   elements:
-  - name: Pending Reconciliation
+  - name: Subscriptions and one-time payments
+  - name: Content publishing (audio, video, images, livestream)
+  - name: Member analytics and growth tools
+  - name: REST API v2 (JSON:API) and webhooks
+  - name: Multi-currency support
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

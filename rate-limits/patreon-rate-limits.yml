@@ -5,31 +5,48 @@ provider: Patreon
 providerId: patreon
 created: '2026-05-08'
 modified: '2026-05-08'
-reconciled: false
+reconciled: true
 tags:
 - Creator Economy
 - Membership
-- Subscription
-- Content
-- Community
 - Rate Limiting
 - Quotas
 - Throttling
-description: Placeholder rate-limit artifact for Patreon. Replace with real limits once researched.
-notes: Initial scaffold — limits have not yet been reconciled.
+description: Documented Patreon API rate limits per client and per access token.
+notes: >-
+  Patreon enforces both client-level and token-level limits, plus an edge-tier protection
+  that blocks clients producing many 4xx errors. Exceeded limits return HTTP 429 with an
+  optional retry_after_seconds field.
 sources:
-- https://www.patreon.com/
+- https://docs.patreon.com/
 responseCodes:
   throttled: 429
 limits:
-- name: Default
-  scope: account
-  metric: varies
-  limit: see provider documentation
-  notes: Pending reconciliation.
+- name: Client requests
+  scope: client
+  metric: requests
+  limit: 100
+  window: 2 seconds
+  notes: Per registered OAuth client.
+- name: Token requests
+  scope: token
+  metric: requests
+  limit: 100
+  window: 1 minute
+  notes: Per access token.
+- name: Edge 4xx protection
+  scope: client
+  metric: 4xx_errors
+  limit: 2000
+  window: 10 minutes
+  notes: Triggers a 30-minute block at the edge.
 policies:
 - name: Backoff Strategy
-  description: Clients should implement exponential backoff with jitter and honor any Retry-After header.
+  description: Honor Retry-After / retry_after_seconds and apply exponential backoff with jitter.
+- name: Reduce 4xx Errors
+  description: >-
+    Validate inputs before calling the API and avoid hammering 404s or 401s to prevent
+    edge-level blocks.
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
