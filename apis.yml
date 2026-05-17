@@ -1,7 +1,7 @@
 aid: patreon
 url: https://raw.githubusercontent.com/api-evangelist/patreon/refs/heads/main/apis.yml
 name: Patreon
-x-type: company
+kind: company
 description: >-
   Patreon is a membership platform for creators offering tiered subscriptions, content publishing,
   community, and payments. The Patreon API v2 follows the JSON:API specification and exposes
