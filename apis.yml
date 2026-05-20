@@ -42,6 +42,10 @@ apis:
       - type: Webhooks
         url: https://docs.patreon.com/#webhooks
 common:
+  - type: GitHubOrganization
+    url: https://github.com/Patreon
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/patreon
   - type: Website
     url: https://www.patreon.com/
   - type: Portal
