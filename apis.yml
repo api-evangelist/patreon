@@ -2,66 +2,68 @@ aid: patreon
 url: https://raw.githubusercontent.com/api-evangelist/patreon/refs/heads/main/apis.yml
 name: Patreon
 kind: company
-description: >-
-  Patreon is a membership platform for creators offering tiered subscriptions, content publishing,
-  community, and payments. The Patreon API v2 follows the JSON:API specification and exposes
-  campaigns, members, posts, tiers, benefits, and webhooks via OAuth 2.0.
+description: Patreon is a membership platform for creators offering tiered subscriptions,
+  content publishing, community, and payments. The Patreon API v2 follows the JSON:API
+  specification and exposes campaigns, members, posts, tiers, benefits, and webhooks
+  via OAuth 2.0.
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Creator Economy
-  - Membership
-  - Subscription
-  - Content
-  - Community
+- Creator Economy
+- Membership
+- Subscription
+- Content
+- Community
 created: '2026-05-08'
 modified: '2026-05-08'
 specificationVersion: '0.19'
 apis:
-  - aid: patreon:patreon-api-v2
-    name: Patreon API v2
-    humanURL: https://docs.patreon.com/
-    baseURL: https://www.patreon.com/api/oauth2/v2
-    tags:
-      - Creator Economy
-      - Membership
-      - Campaigns
-      - Members
-      - Posts
-      - Webhooks
-    description: >-
-      The Patreon REST API v2 follows the JSON:API specification. It exposes campaigns,
-      members (patrons), posts, tiers, benefits, addresses, and webhooks. Authentication
-      uses OAuth 2.0 with creator-issued access tokens or three-legged OAuth flows.
-    properties:
-      - type: Documentation
-        url: https://docs.patreon.com/
-      - type: Authentication
-        url: https://docs.patreon.com/#oauth
-      - type: SignUp
-        url: https://www.patreon.com/portal/registration/register-clients
-      - type: Webhooks
-        url: https://docs.patreon.com/#webhooks
-common:
-  - type: GitHubOrganization
-    url: https://github.com/Patreon
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/patreon
-  - type: Website
-    url: https://www.patreon.com/
-  - type: Portal
+- aid: patreon:patreon-api-v2
+  name: Patreon API v2
+  humanURL: https://docs.patreon.com/
+  baseURL: https://www.patreon.com/api/oauth2/v2
+  tags:
+  - Creator Economy
+  - Membership
+  - Campaigns
+  - Members
+  - Posts
+  - Webhooks
+  description: The Patreon REST API v2 follows the JSON:API specification. It exposes
+    campaigns, members (patrons), posts, tiers, benefits, addresses, and webhooks.
+    Authentication uses OAuth 2.0 with creator-issued access tokens or three-legged
+    OAuth flows.
+  properties:
+  - type: Documentation
     url: https://docs.patreon.com/
+  - type: Authentication
+    url: https://docs.patreon.com/#oauth
   - type: SignUp
     url: https://www.patreon.com/portal/registration/register-clients
-  - type: Forums
-    url: https://www.patreondevelopers.com/
-  - type: Pricing
-    url: https://www.patreon.com/pricing
-  - type: Plans
-    url: plans/patreon-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/patreon-rate-limits.yml
-  - type: FinOps
-    url: finops/patreon-finops.yml
+  - type: Webhooks
+    url: https://docs.patreon.com/#webhooks
+  - url: graphql/patreon-graphql.md
+    type: GraphQL
+common:
+- type: GitHubOrganization
+  url: https://github.com/Patreon
+- type: LinkedIn
+  url: https://www.linkedin.com/company/patreon
+- type: Website
+  url: https://www.patreon.com/
+- type: Portal
+  url: https://docs.patreon.com/
+- type: SignUp
+  url: https://www.patreon.com/portal/registration/register-clients
+- type: Forums
+  url: https://www.patreondevelopers.com/
+- type: Pricing
+  url: https://www.patreon.com/pricing
+- type: Plans
+  url: plans/patreon-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/patreon-rate-limits.yml
+- type: FinOps
+  url: finops/patreon-finops.yml
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com

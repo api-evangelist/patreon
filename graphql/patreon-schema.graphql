@@ -1,0 +1,700 @@
+"""
+Patreon GraphQL Schema
+Conceptual schema derived from Patreon API v2 (JSON:API / REST).
+Covers campaigns, members, posts, tiers, benefits, webhooks, OAuth, and supporting types.
+"""
+
+# ---------- Scalars ----------
+
+scalar DateTime
+scalar URL
+scalar JSON
+
+# ---------- Enums ----------
+
+enum CampaignStatus {
+  ACTIVE
+  INACTIVE
+  DRAFT
+}
+
+enum TierAmount {
+  FREE
+  PAID
+}
+
+enum PatronStatus {
+  ACTIVE_PATRON
+  DECLINED_PATRON
+  FORMER_PATRON
+}
+
+enum PledgeCurrency {
+  USD
+  EUR
+  GBP
+  CAD
+  AUD
+}
+
+enum MembershipStatus {
+  ACTIVE
+  INACTIVE
+  PENDING
+  DECLINED
+  CANCELLED
+}
+
+enum PostType {
+  TEXT
+  IMAGE
+  VIDEO
+  AUDIO
+  LINK
+  POLL
+}
+
+enum PostStatus {
+  PUBLISHED
+  DRAFT
+  SCHEDULED
+}
+
+enum PostAccess {
+  PUBLIC
+  PATRONS_ONLY
+  TIER_LOCKED
+}
+
+enum BenefitType {
+  DIGITAL_DOWNLOAD
+  CUSTOM
+  DISCORD_ROLE
+  PHYSICAL_GOOD
+  OTHER
+}
+
+enum GoalStatus {
+  IN_PROGRESS
+  COMPLETE
+  OVER
+}
+
+enum WebhookEvent {
+  MEMBERS_PLEDGE_CREATE
+  MEMBERS_PLEDGE_UPDATE
+  MEMBERS_PLEDGE_DELETE
+  MEMBERS_SUBSCRIPTION_CREATE
+  MEMBERS_SUBSCRIPTION_UPDATE
+  MEMBERS_SUBSCRIPTION_DELETE
+  POSTS_PUBLISH
+  POSTS_UPDATE
+  POSTS_DELETE
+}
+
+enum WebhookTrigger {
+  PLEDGE_CREATE
+  PLEDGE_UPDATE
+  PLEDGE_DELETE
+  SUBSCRIPTION_CREATE
+  SUBSCRIPTION_UPDATE
+  SUBSCRIPTION_DELETE
+  POST_PUBLISH
+}
+
+enum Scope {
+  IDENTITY
+  IDENTITY_EMAIL
+  CAMPAIGNS
+  CAMPAIGNS_POSTS
+  CAMPAIGNS_MEMBERS
+  CAMPAIGNS_MEMBERS_ADDRESS
+  MY_CAMPAIGN
+  WEBHOOKS
+}
+
+# ---------- User Types ----------
+
+type User {
+  id: ID!
+  details: UserDetails
+  email: UserEmail
+  campaigns: [Campaign!]
+  memberships: [Membership!]
+  pledges: [Pledge!]
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+type UserDetails {
+  fullName: String!
+  firstName: String
+  lastName: String
+  imageUrl: URL
+  thumbUrl: URL
+  about: String
+  url: URL
+  vanity: String
+  socialConnections: JSON
+  isEmailVerified: Boolean
+  likeCount: Int
+  hidesPledges: Boolean
+  canSeeNsfw: Boolean
+}
+
+type UserEmail {
+  address: String!
+  verified: Boolean!
+  primary: Boolean!
+}
+
+# ---------- Creator Types ----------
+
+type Creator {
+  id: ID!
+  details: CreatorDetails
+  type: CreatorType
+  campaigns: [Campaign!]
+  url: URL
+}
+
+type CreatorDetails {
+  fullName: String!
+  imageUrl: URL
+  thumbUrl: URL
+  about: String
+  vanity: String
+  url: URL
+  socialConnections: JSON
+}
+
+type CreatorType {
+  label: String!
+  value: String!
+}
+
+# ---------- Campaign Types ----------
+
+type Campaign {
+  id: ID!
+  details: CampaignDetails
+  status: CampaignStatus!
+  url: CampaignUrl
+  creator: Creator!
+  tiers: [Tier!]
+  goals: [Goal!]
+  posts: [Post!]
+  benefits: [Benefit!]
+  members: [Patron!]
+  createdAt: DateTime!
+  publishedAt: DateTime
+  pledgeSum: Int
+  patronCount: Int
+  isMonthly: Boolean
+  isNsfw: Boolean
+  mainVideoUrl: URL
+  mainVideoEmbed: String
+  summary: String
+  thanksMsg: String
+  thanksVideoUrl: URL
+  thanksEmbed: String
+  avatar: URL
+  coverPhotoUrl: URL
+}
+
+type CampaignDetails {
+  name: String!
+  description: String
+  summary: String
+  currency: PledgeCurrency!
+  payPerName: String
+  oneLinerAbout: String
+  mainVideoUrl: URL
+  imageSmallUrl: URL
+  imageLargeUrl: URL
+  showEarnings: Boolean
+}
+
+type CampaignUrl {
+  url: URL!
+  vanity: String
+  creationName: String
+}
+
+# ---------- Tier Types ----------
+
+type Tier {
+  id: ID!
+  details: TierDetails
+  amount: TierAmount!
+  title: TierTitle!
+  description: TierDescription
+  perks: TierPerks
+  campaign: Campaign!
+  benefits: [Benefit!]
+  members: [Patron!]
+  createdAt: DateTime!
+  editedAt: DateTime
+  publishedAt: DateTime
+  unpublishedAt: DateTime
+  patronCount: Int
+  postCount: Int
+  remaining: Int
+  userLimit: Int
+  imageUrl: URL
+  discordRoleIds: [String!]
+  requiresShipping: Boolean
+}
+
+type TierDetails {
+  amountCents: Int!
+  currency: PledgeCurrency!
+  published: Boolean!
+  isFreeTier: Boolean!
+}
+
+type TierTitle {
+  value: String!
+}
+
+type TierDescription {
+  value: String
+  html: String
+}
+
+type TierPerks {
+  items: [String!]
+  welcomeMessage: String
+  welcomeMessageUnsafe: String
+}
+
+# ---------- Patron Types ----------
+
+type Patron {
+  id: ID!
+  details: PatronDetails
+  status: PatronStatus
+  user: User
+  campaign: Campaign!
+  pledge: Pledge
+  membership: Membership
+  address: Address
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+type PatronDetails {
+  fullName: String!
+  email: String
+  thumbUrl: URL
+  note: String
+  willPayAmountCents: Int
+}
+
+# ---------- Pledge Types ----------
+
+type Pledge {
+  id: ID!
+  details: PledgeDetails
+  amount: PledgeAmount!
+  currency: PledgeCurrency!
+  patron: Patron
+  campaign: Campaign!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  declinedSince: DateTime
+  pauseResumeAt: DateTime
+  totalHistoricalAmountCents: Int
+}
+
+type PledgeDetails {
+  amountCents: Int!
+  currency: PledgeCurrency!
+  cadence: Int
+  status: PatronStatus!
+  pledgeCapAmountCents: Int
+}
+
+type PledgeAmount {
+  cents: Int!
+  currency: PledgeCurrency!
+}
+
+# ---------- Membership Types ----------
+
+type Membership {
+  id: ID!
+  details: MembershipDetails
+  status: MembershipStatus!
+  lifetimeSupport: MembershipLifetimeSupport
+  user: User
+  campaign: Campaign!
+  tier: Tier
+  address: Address
+  pledge: Pledge
+  deliverables: [Deliverable!]
+  nextChargeDate: DateTime
+  lastChargeDate: DateTime
+  lastChargeStatus: String
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+type MembershipDetails {
+  email: String
+  fullName: String!
+  note: String
+  patronStatus: PatronStatus
+  isFollower: Boolean
+  willPayAmountCents: Int
+  currentlyEntitledAmountCents: Int
+  campaignCurrencyCode: String
+}
+
+type MembershipStatus {
+  value: MembershipStatus!
+  label: String!
+}
+
+type MembershipLifetimeSupport {
+  amountCents: Int!
+  currency: PledgeCurrency!
+}
+
+# ---------- Goal Types ----------
+
+type Goal {
+  id: ID!
+  details: GoalDetails
+  amount: GoalAmount!
+  status: GoalStatus!
+  campaign: Campaign!
+  createdAt: DateTime!
+  reachedAt: DateTime
+}
+
+type GoalDetails {
+  title: String!
+  description: String
+  descriptionHtml: String
+}
+
+type GoalAmount {
+  amountCents: Int!
+  currency: PledgeCurrency!
+  completedPercentage: Int!
+}
+
+# ---------- Post Types ----------
+
+type Post {
+  id: ID!
+  details: PostDetails
+  type: PostType!
+  status: PostStatus!
+  access: PostAccess!
+  campaign: Campaign!
+  tier: PostTier
+  comments: [Comment!]
+  attachments: [Attachment!]
+  user: User
+  url: URL
+  embedData: JSON
+  embedUrl: URL
+  patreonUrl: URL
+  publishedAt: DateTime
+  editedAt: DateTime
+  scheduledFor: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime
+  likeCount: Int
+  commentCount: Int
+  isPaid: Boolean
+  teaser: String
+  image: PostImage
+}
+
+type PostDetails {
+  title: String
+  content: String
+  contentTeaser: String
+  contentType: PostType!
+  isPublic: Boolean!
+  minCentsPledgedToView: Int
+  wasPostedByPatronUser: Boolean
+}
+
+type PostTier {
+  id: ID!
+  title: String!
+  amountCents: Int!
+}
+
+type PostImage {
+  url: URL
+  largeUrl: URL
+  thumbUrl: URL
+  width: Int
+  height: Int
+}
+
+# ---------- Comment Types ----------
+
+type Comment {
+  id: ID!
+  details: CommentDetails
+  post: Post
+  author: User
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+type CommentDetails {
+  body: String!
+  isDeleted: Boolean!
+}
+
+# ---------- Attachment Types ----------
+
+type Attachment {
+  id: ID!
+  details: AttachmentDetails
+  post: Post
+  url: URL
+  name: String
+  mediaType: String
+}
+
+type AttachmentDetails {
+  url: URL!
+  name: String
+  mediaType: String
+  sizeBytes: Int
+}
+
+# ---------- Benefit Types ----------
+
+type Benefit {
+  id: ID!
+  details: BenefitDetails
+  type: BenefitType!
+  campaign: Campaign
+  tiers: [Tier!]
+  deliverables: [Deliverable!]
+  deliverablesDue: Int
+  deliverablesCompleted: Int
+  deliverablesPending: Int
+  nextDeliverable: DateTime
+  createdAt: DateTime!
+  deletedAt: DateTime
+}
+
+type BenefitDetails {
+  title: String!
+  description: String
+  benefitType: BenefitType!
+  rulType: String
+  isDeliverable: Boolean
+  isPublished: Boolean
+  isEnded: Boolean
+  isLimitReached: Boolean
+}
+
+# ---------- Deliverable Types ----------
+
+type Deliverable {
+  id: ID!
+  details: DeliverableDetails
+  benefit: Benefit
+  member: Membership
+  campaign: Campaign
+  dueAt: DateTime
+  completedAt: DateTime
+  status: String
+}
+
+type DeliverableDetails {
+  status: String!
+  dueAt: DateTime
+  completedAt: DateTime
+}
+
+# ---------- Webhook Types ----------
+
+type Webhook {
+  id: ID!
+  event: WebhookEvent!
+  trigger: WebhookTrigger!
+  uri: URL!
+  paused: Boolean!
+  lastAttemptedAt: DateTime
+  numConsecutiveTimesFailed: Int
+  secret: String
+  campaign: Campaign!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+# ---------- OAuth Types ----------
+
+type OAuthClient {
+  id: ID!
+  name: String!
+  description: String
+  clientId: String!
+  redirectUris: [URL!]!
+  scopes: [Scope!]
+  iconUrl: URL
+  privacyPolicyUrl: URL
+  tosUrl: URL
+  createdAt: DateTime!
+}
+
+type OAuthToken {
+  accessToken: String!
+  refreshToken: String
+  tokenType: String!
+  expiresIn: Int
+  scope: String!
+  version: String
+}
+
+type APIKey {
+  id: ID!
+  key: String!
+  createdAt: DateTime!
+  expiresAt: DateTime
+}
+
+type Token {
+  id: ID!
+  value: String!
+  scope: Scope!
+  expiresAt: DateTime
+}
+
+# ---------- Address Type ----------
+
+type Address {
+  id: ID!
+  addressee: String
+  line1: String
+  line2: String
+  postalCode: String
+  city: String
+  state: String
+  country: String
+  phoneNumber: String
+  createdAt: DateTime!
+}
+
+# ---------- Pagination ----------
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+  total: Int
+}
+
+type CampaignConnection {
+  nodes: [Campaign!]
+  pageInfo: PageInfo!
+}
+
+type MemberConnection {
+  nodes: [Patron!]
+  pageInfo: PageInfo!
+}
+
+type PostConnection {
+  nodes: [Post!]
+  pageInfo: PageInfo!
+}
+
+type TierConnection {
+  nodes: [Tier!]
+  pageInfo: PageInfo!
+}
+
+type BenefitConnection {
+  nodes: [Benefit!]
+  pageInfo: PageInfo!
+}
+
+type WebhookConnection {
+  nodes: [Webhook!]
+  pageInfo: PageInfo!
+}
+
+# ---------- Queries ----------
+
+type Query {
+  "Get the currently authenticated user (creator or patron)"
+  me: User
+
+  "Get a campaign by ID"
+  campaign(id: ID!): Campaign
+
+  "List campaigns for the authenticated creator"
+  campaigns(cursor: String, pageSize: Int): CampaignConnection!
+
+  "Get a single member (patron membership) by ID"
+  member(id: ID!): Membership
+
+  "List members for a campaign"
+  members(campaignId: ID!, cursor: String, pageSize: Int): MemberConnection!
+
+  "Get a post by ID"
+  post(id: ID!): Post
+
+  "List posts for a campaign"
+  posts(campaignId: ID!, cursor: String, pageSize: Int): PostConnection!
+
+  "Get a tier by ID"
+  tier(id: ID!): Tier
+
+  "List tiers for a campaign"
+  tiers(campaignId: ID!): TierConnection!
+
+  "Get a benefit by ID"
+  benefit(id: ID!): Benefit
+
+  "List webhooks for the authenticated user"
+  webhooks(campaignId: ID!): WebhookConnection!
+
+  "Get address by ID"
+  address(id: ID!): Address
+}
+
+# ---------- Mutations ----------
+
+type Mutation {
+  "Create a new webhook for a campaign"
+  createWebhook(
+    campaignId: ID!
+    uri: URL!
+    triggers: [WebhookTrigger!]!
+  ): Webhook
+
+  "Update an existing webhook"
+  updateWebhook(
+    id: ID!
+    uri: URL
+    triggers: [WebhookTrigger!]
+    paused: Boolean
+  ): Webhook
+
+  "Delete a webhook"
+  deleteWebhook(id: ID!): Boolean
+
+  "Update a post"
+  updatePost(
+    id: ID!
+    title: String
+    content: String
+    status: PostStatus
+    access: PostAccess
+  ): Post
+}
