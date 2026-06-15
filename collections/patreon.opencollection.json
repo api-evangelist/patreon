@@ -1,0 +1,327 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Patreon API v2",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OAuth2 authorization request",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://www.patreon.com/oauth2/authorize",
+        "params": [
+          {
+            "name": "response_type",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "client_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "redirect_uri",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "scope",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "state",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "OAuth2 authorization request"
+    },
+    {
+      "info": {
+        "name": "Exchange a code or refresh token for an access token",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://www.patreon.com/api/oauth2/token",
+        "body": {
+          "type": "form-urlencoded",
+          "data": [
+            {
+              "name": "grant_type",
+              "value": ""
+            },
+            {
+              "name": "code",
+              "value": ""
+            },
+            {
+              "name": "refresh_token",
+              "value": ""
+            },
+            {
+              "name": "client_id",
+              "value": ""
+            },
+            {
+              "name": "client_secret",
+              "value": ""
+            },
+            {
+              "name": "redirect_uri",
+              "value": ""
+            }
+          ]
+        }
+      },
+      "docs": "Exchange a code or refresh token for an access token"
+    },
+    {
+      "info": {
+        "name": "Fetch the current user's profile",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://www.patreon.com/api/oauth2/v2/identity"
+      },
+      "docs": "Fetch the current user's profile"
+    },
+    {
+      "info": {
+        "name": "List campaigns owned by the authorized user",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://www.patreon.com/api/oauth2/v2/campaigns"
+      },
+      "docs": "List campaigns owned by the authorized user"
+    },
+    {
+      "info": {
+        "name": "Get a single campaign",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://www.patreon.com/api/oauth2/v2/campaigns/:campaign_id",
+        "params": [
+          {
+            "name": "campaign_id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Get a single campaign"
+    },
+    {
+      "info": {
+        "name": "List members of a campaign",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://www.patreon.com/api/oauth2/v2/campaigns/:campaign_id/members",
+        "params": [
+          {
+            "name": "campaign_id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "List members of a campaign"
+    },
+    {
+      "info": {
+        "name": "Get an individual member",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://www.patreon.com/api/oauth2/v2/members/:member_id",
+        "params": [
+          {
+            "name": "member_id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Get an individual member"
+    },
+    {
+      "info": {
+        "name": "List posts on a campaign",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://www.patreon.com/api/oauth2/v2/campaigns/:campaign_id/posts",
+        "params": [
+          {
+            "name": "campaign_id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "List posts on a campaign"
+    },
+    {
+      "info": {
+        "name": "Get an individual post",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://www.patreon.com/api/oauth2/v2/posts/:id",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Get an individual post"
+    },
+    {
+      "info": {
+        "name": "Create a livestream event",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://www.patreon.com/api/oauth2/v2/lives",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a livestream event"
+    },
+    {
+      "info": {
+        "name": "Get livestream details",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://www.patreon.com/api/oauth2/v2/lives/:id",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Get livestream details"
+    },
+    {
+      "info": {
+        "name": "Update livestream state",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "https://www.patreon.com/api/oauth2/v2/lives/:id",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Update livestream state"
+    },
+    {
+      "info": {
+        "name": "List webhooks for a campaign",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://www.patreon.com/api/oauth2/v2/webhooks"
+      },
+      "docs": "List webhooks for a campaign"
+    },
+    {
+      "info": {
+        "name": "Create a webhook",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://www.patreon.com/api/oauth2/v2/webhooks",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a webhook"
+    },
+    {
+      "info": {
+        "name": "Update a webhook",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "https://www.patreon.com/api/oauth2/v2/webhooks/:id",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Update a webhook"
+    },
+    {
+      "info": {
+        "name": "Delete a webhook",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://www.patreon.com/api/oauth2/v2/webhooks/:id",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Delete a webhook"
+    }
+  ],
+  "bundled": true
+}
