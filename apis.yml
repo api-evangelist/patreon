@@ -6,7 +6,7 @@ description: Patreon is a membership platform for creators offering tiered subsc
   content publishing, community, and payments. The Patreon API v2 follows the JSON:API
   specification and exposes campaigns, members, posts, tiers, benefits, and webhooks
   via OAuth 2.0.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - Creator Economy
 - Membership
