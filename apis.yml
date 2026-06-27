@@ -37,7 +37,7 @@ apis:
     url: https://docs.patreon.com/
   - type: Authentication
     url: https://docs.patreon.com/#oauth
-  - type: SignUp
+  - type: Signup
     url: https://www.patreon.com/portal/registration/register-clients
   - type: Webhooks
     url: https://docs.patreon.com/#webhooks
@@ -52,7 +52,7 @@ common:
   url: https://www.patreon.com/
 - type: Portal
   url: https://docs.patreon.com/
-- type: SignUp
+- type: Signup
   url: https://www.patreon.com/portal/registration/register-clients
 - type: Forums
   url: https://www.patreondevelopers.com/
