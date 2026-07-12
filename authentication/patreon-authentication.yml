@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/patreon-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: OAuth2 access token
+  description: |-
+    Pass `Authorization: Bearer {access_token}`. Tokens are issued via
+    the Patreon OAuth flow (`/oauth2/authorize` and `/api/oauth2/token`).
+  sources:
+  - openapi/patreon-openapi.yml

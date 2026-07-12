@@ -44,6 +44,12 @@ apis:
   - url: graphql/patreon-graphql.md
     type: GraphQL
 common:
+- type: VulnerabilityDisclosure
+  url: security/patreon-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/patreon-domain-security.yml
+- type: Authentication
+  url: authentication/patreon-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/Patreon
 - type: LinkedIn
