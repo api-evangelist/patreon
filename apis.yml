@@ -44,6 +44,8 @@ apis:
   - url: graphql/patreon-graphql.md
     type: GraphQL
 common:
+- type: AgenticAccess
+  url: agentic-access/patreon-agentic-access.yml
 - type: VulnerabilityDisclosure
   url: security/patreon-vulnerability-disclosure.yml
 - type: DomainSecurity
