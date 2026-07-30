@@ -6,7 +6,20 @@ description: Patreon is a membership platform for creators offering tiered subsc
   content publishing, community, and payments. The Patreon API v2 follows the JSON:API
   specification and exposes campaigns, members, posts, tiers, benefits, and webhooks
   via OAuth 2.0.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/patreon.png
 tags:
 - Creator Economy
 - Membership
@@ -28,10 +41,10 @@ apis:
   - Members
   - Posts
   - Webhooks
-  description: The Patreon REST API v2 follows the JSON:API specification. It exposes
-    campaigns, members (patrons), posts, tiers, benefits, addresses, and webhooks.
-    Authentication uses OAuth 2.0 with creator-issued access tokens or three-legged
-    OAuth flows.
+  description: >-
+    The Patreon REST API v2 follows the JSON:API specification. It exposes campaigns, members (patrons),
+    posts, tiers, benefits, addresses, and webhooks. Authentication uses OAuth 2.0 with creator-issued
+    access tokens or three-legged OAuth flows.
   properties:
   - type: Documentation
     url: https://docs.patreon.com/
@@ -43,6 +56,16 @@ apis:
     url: https://docs.patreon.com/#webhooks
   - url: graphql/patreon-graphql.md
     type: GraphQL
+- aid: patreon:patreon-oauth2-api
+  name: Patreon Oauth2 API
+  description: The Oauth2 API from Patreon — 13 operation(s) for oauth2.
+  humanURL: https://docs.patreon.com/
+  baseURL: https://www.patreon.com/api/oauth2/v2
+  tags:
+  - Oauth2
+  properties:
+  - type: OpenAPI
+    url: openapi/patreon-oauth2-api-openapi.yml
 common:
 - type: AgenticAccess
   url: agentic-access/patreon-agentic-access.yml
