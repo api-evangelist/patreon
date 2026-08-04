@@ -1,0 +1,14 @@
+{
+  "provider": "patreon",
+  "sources": [
+    "patreon-oauth2-api-openapi.yml"
+  ],
+  "outputs": [
+    "patreon-oauth2-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
