@@ -28,7 +28,7 @@ tags:
 - Community
 created: '2026-05-08'
 modified: '2026-05-08'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: patreon:patreon-api-v2
   name: Patreon API v2
