@@ -40,6 +40,13 @@ apis:
   - Campaigns
   - Members
   - Posts
+  - Webhook
+  tags_raw:
+  - Creator Economy
+  - Membership
+  - Campaigns
+  - Members
+  - Posts
   - Webhooks
   description: >-
     The Patreon REST API v2 follows the JSON:API specification. It exposes campaigns, members (patrons),
@@ -62,6 +69,8 @@ apis:
   humanURL: https://docs.patreon.com/
   baseURL: https://www.patreon.com/api/oauth2/v2
   tags:
+  - Authentication
+  tags_raw:
   - Oauth2
   properties:
   - type: OpenAPI
