@@ -6,6 +6,18 @@ description: Patreon is a membership platform for creators offering tiered subsc
   content publishing, community, and payments. The Patreon API v2 follows the JSON:API
   specification and exposes campaigns, members, posts, tiers, benefits, and webhooks
   via OAuth 2.0.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
