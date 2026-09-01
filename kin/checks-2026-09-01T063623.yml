@@ -1,15 +1,15 @@
 ---
 kin_checks:
   slug: patreon
-  schema_version: 0.16.0
-  scored_at: '2026-08-29'
-  run_ts: 2026-08-29T230545
+  schema_version: 0.17.2
+  scored_at: '2026-09-01'
+  run_ts: 2026-09-01T063623
   note: Actionable checks only (missed + partial). earned/na are every other check
-    in rubric/scoring-0.16.0.yml; counts below let you verify that.
+    in rubric/scoring-0.17.2.yml; counts below let you verify that.
   counts:
     total: 130
-    earned: 36
-    partial: 9
+    earned: 34
+    partial: 11
     missed: 64
     na: 21
   checks:
@@ -158,9 +158,17 @@ kin_checks:
   - id: rate_limits_rich
     status: partial
     earned: 1.0
+  - id: webhooks_advertised
+    status: partial
+    earned: 1.5
+    detail: pointer liveness 0.5
   - id: github_org_present
     status: partial
     earned: 1.0
+    detail: pointer liveness 0.5
+  - id: authentication_documented
+    status: partial
+    earned: 2.5
     detail: pointer liveness 0.5
   - id: plans_present
     status: partial
