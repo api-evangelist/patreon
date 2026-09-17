@@ -82,8 +82,6 @@ apis:
   humanURL: https://docs.patreon.com/
   baseURL: https://www.patreon.com/api/oauth2/v2
   tags:
-  - Authentication
-  tags_raw:
   - Oauth2
   properties:
   - type: OpenAPI
