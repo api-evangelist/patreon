@@ -1,13 +1,11 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Patreon API v2 Oauth2 API
   description: 'Patreon''s APIv2 exposes identity, campaign, member, post, livestream and
 
     webhook resources for creator integrations. Authentication uses OAuth2
 
-    Bearer tokens issued via the Patreon OAuth flow.
-
-    '
+    Bearer tokens issued via the Patreon OAuth flow.'
   version: 2.0.0
   contact:
     name: Patreon Developers
@@ -18,7 +16,7 @@ servers:
 security:
 - BearerAuth: []
 tags:
-- name: Oauth2
+- name: OAuth2
 paths:
   /oauth2/authorize:
     get:
@@ -53,7 +51,9 @@ paths:
           description: Redirect to the configured redirect URI with an authorization code.
       security: []
       tags:
-      - Oauth2
+      - OAuth2
+      operationId: getOauth2Authorize
+      x-operation-id-source: derived
   /api/oauth2/token:
     post:
       summary: Exchange a code or refresh token for an access token
@@ -82,7 +82,9 @@ paths:
           description: Access token issued.
       security: []
       tags:
-      - Oauth2
+      - OAuth2
+      operationId: postApiOauth2Token
+      x-operation-id-source: derived
   /api/oauth2/v2/identity:
     get:
       summary: Fetch the current user's profile
@@ -90,7 +92,9 @@ paths:
         '200':
           description: Current user identity.
       tags:
-      - Oauth2
+      - OAuth2
+      operationId: getApiOauth2V2Identity
+      x-operation-id-source: derived
   /api/oauth2/v2/campaigns:
     get:
       summary: List campaigns owned by the authorized user
@@ -98,7 +102,9 @@ paths:
         '200':
           description: A list of campaigns.
       tags:
-      - Oauth2
+      - OAuth2
+      operationId: getApiOauth2V2Campaigns
+      x-operation-id-source: derived
   /api/oauth2/v2/campaigns/{campaign_id}:
     get:
       summary: Get a single campaign
@@ -112,7 +118,9 @@ paths:
         '200':
           description: Campaign details.
       tags:
-      - Oauth2
+      - OAuth2
+      operationId: getApiOauth2V2CampaignsByCampaignId
+      x-operation-id-source: derived
   /api/oauth2/v2/campaigns/{campaign_id}/members:
     get:
       summary: List members of a campaign
@@ -126,7 +134,9 @@ paths:
         '200':
           description: A paginated list of members.
       tags:
-      - Oauth2
+      - OAuth2
+      operationId: getApiOauth2V2CampaignsByCampaignIdMembers
+      x-operation-id-source: derived
   /api/oauth2/v2/members/{member_id}:
     get:
       summary: Get an individual member
@@ -140,7 +150,9 @@ paths:
         '200':
           description: Member details.
       tags:
-      - Oauth2
+      - OAuth2
+      operationId: getApiOauth2V2MembersByMemberId
+      x-operation-id-source: derived
   /api/oauth2/v2/campaigns/{campaign_id}/posts:
     get:
       summary: List posts on a campaign
@@ -154,7 +166,9 @@ paths:
         '200':
           description: A paginated list of posts.
       tags:
-      - Oauth2
+      - OAuth2
+      operationId: getApiOauth2V2CampaignsByCampaignIdPosts
+      x-operation-id-source: derived
   /api/oauth2/v2/posts/{id}:
     get:
       summary: Get an individual post
@@ -168,7 +182,9 @@ paths:
         '200':
           description: Post details.
       tags:
-      - Oauth2
+      - OAuth2
+      operationId: getApiOauth2V2PostsById
+      x-operation-id-source: derived
   /api/oauth2/v2/lives:
     post:
       summary: Create a livestream event
@@ -182,7 +198,9 @@ paths:
         '200':
           description: Livestream created.
       tags:
-      - Oauth2
+      - OAuth2
+      operationId: postApiOauth2V2Lives
+      x-operation-id-source: derived
   /api/oauth2/v2/lives/{id}:
     get:
       summary: Get livestream details
@@ -196,7 +214,9 @@ paths:
         '200':
           description: Livestream details.
       tags:
-      - Oauth2
+      - OAuth2
+      operationId: getApiOauth2V2LivesById
+      x-operation-id-source: derived
     patch:
       summary: Update livestream state
       parameters:
@@ -215,7 +235,9 @@ paths:
         '200':
           description: Livestream updated.
       tags:
-      - Oauth2
+      - OAuth2
+      operationId: patchApiOauth2V2LivesById
+      x-operation-id-source: derived
   /api/oauth2/v2/webhooks:
     get:
       summary: List webhooks for a campaign
@@ -223,7 +245,9 @@ paths:
         '200':
           description: A list of webhooks.
       tags:
-      - Oauth2
+      - OAuth2
+      operationId: getApiOauth2V2Webhooks
+      x-operation-id-source: derived
     post:
       summary: Create a webhook
       requestBody:
@@ -236,7 +260,9 @@ paths:
         '200':
           description: Webhook created.
       tags:
-      - Oauth2
+      - OAuth2
+      operationId: postApiOauth2V2Webhooks
+      x-operation-id-source: derived
   /api/oauth2/v2/webhooks/{id}:
     patch:
       summary: Update a webhook
@@ -256,7 +282,9 @@ paths:
         '200':
           description: Webhook updated.
       tags:
-      - Oauth2
+      - OAuth2
+      operationId: patchApiOauth2V2WebhooksById
+      x-operation-id-source: derived
     delete:
       summary: Delete a webhook
       parameters:
@@ -269,7 +297,9 @@ paths:
         '200':
           description: Webhook deleted.
       tags:
-      - Oauth2
+      - OAuth2
+      operationId: deleteApiOauth2V2WebhooksById
+      x-operation-id-source: derived
 components:
   securitySchemes:
     BearerAuth:

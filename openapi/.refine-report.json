@@ -1,14 +1,40 @@
 {
   "provider": "patreon",
   "sources": [
-    "patreon-oauth2-api-openapi.yml"
+    "_original/patreon-openapi.yml"
   ],
   "outputs": [
     "patreon-oauth2-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "patreon-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "patreon-openapi.yml: tagged paths GET /oauth2/authorize -> Oauth2",
+    "patreon-openapi.yml: tagged paths POST /api/oauth2/token -> Oauth2",
+    "patreon-openapi.yml: tagged paths GET /api/oauth2/v2/identity -> Oauth2",
+    "patreon-openapi.yml: tagged paths GET /api/oauth2/v2/campaigns -> Oauth2",
+    "patreon-openapi.yml: tagged paths GET /api/oauth2/v2/campaigns/{campaign_id} -> Oauth2",
+    "patreon-openapi.yml: tagged paths GET /api/oauth2/v2/campaigns/{campaign_id}/members -> Oauth2",
+    "patreon-openapi.yml: tagged paths GET /api/oauth2/v2/members/{member_id} -> Oauth2",
+    "patreon-openapi.yml: tagged paths GET /api/oauth2/v2/campaigns/{campaign_id}/posts -> Oauth2",
+    "patreon-openapi.yml: tagged paths GET /api/oauth2/v2/posts/{id} -> Oauth2",
+    "patreon-openapi.yml: tagged paths POST /api/oauth2/v2/lives -> Oauth2",
+    "patreon-openapi.yml: tagged paths GET /api/oauth2/v2/lives/{id} -> Oauth2",
+    "patreon-openapi.yml: tagged paths PATCH /api/oauth2/v2/lives/{id} -> Oauth2",
+    "patreon-openapi.yml: tagged paths GET /api/oauth2/v2/webhooks -> Oauth2",
+    "patreon-openapi.yml: tagged paths POST /api/oauth2/v2/webhooks -> Oauth2",
+    "patreon-openapi.yml: tagged paths PATCH /api/oauth2/v2/webhooks/{id} -> Oauth2",
+    "patreon-openapi.yml: tagged paths DELETE /api/oauth2/v2/webhooks/{id} -> Oauth2",
+    "patreon-openapi.yml: declared missing tag: Oauth2",
+    "superseded outputs removed: patreon-o-auth2-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 2 total)"
+  ],
+  "skipped": [
+    "patreon-o-auth2-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
