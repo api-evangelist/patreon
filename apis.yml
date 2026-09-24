@@ -74,8 +74,6 @@ apis:
     url: https://www.patreon.com/portal/registration/register-clients
   - type: Webhooks
     url: https://docs.patreon.com/#webhooks
-  - url: graphql/patreon-graphql.md
-    type: GraphQL
 - aid: patreon:patreon-oauth2-api
   name: Patreon Oauth2 API
   description: The Oauth2 API from Patreon — 13 operation(s) for oauth2.
