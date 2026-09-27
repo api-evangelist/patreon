@@ -6,9 +6,7 @@
   "outputs": [
     "patreon-oauth2-api-openapi.yml"
   ],
-  "archived": [
-    "deleted 1 superseded output(s) from the previous generation"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -31,10 +29,9 @@
     "patreon-openapi.yml: tagged paths PATCH /api/oauth2/v2/webhooks/{id} -> Oauth2",
     "patreon-openapi.yml: tagged paths DELETE /api/oauth2/v2/webhooks/{id} -> Oauth2",
     "patreon-openapi.yml: declared missing tag: Oauth2",
-    "superseded outputs removed: patreon-o-auth2-api-openapi.yml",
-    "apis.yml register: written (+1 apis, 2 total)"
+    "apis.yml register: already-registered"
   ],
   "skipped": [
-    "patreon-o-auth2-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+    "patreon-oauth2-api-openapi.yml: previously refined output, superseded by openapi/_original/"
   ]
 }
